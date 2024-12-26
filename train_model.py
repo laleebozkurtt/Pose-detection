@@ -1,23 +1,29 @@
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
 import pickle
 
-# Veri Setini Yükle
-data = pd.read_csv("egzersiz_veri.csv")
+# Veri setini yükle
+df = pd.read_csv('egzersiz_veri.csv')
 
-# Kategorik Verileri Dönüştür
-label_encoder = LabelEncoder()
-data['Fitness Level'] = label_encoder.fit_transform(data['Fitness Level'])
-data['Goal'] = label_encoder.fit_transform(data['Goal'])
-data['Target Area'] = label_encoder.fit_transform(data['Target Area'])
+# Veriyi ön işleme (örneğin, kategorik verileri sayısal verilere dönüştürme)
+encoder = LabelEncoder()
+df['Fitness_Level'] = encoder.fit_transform(df['Fitness_Level'])
+df['Goal'] = encoder.fit_transform(df['Goal'])
+df['Target_Area'] = encoder.fit_transform(df['Target_Area'])
 
-X = data[['Fitness Level', 'Goal', 'Target Area']]
-y = data['Exercise']  # Y hedefi sadece 'Exercise'
+# Özellikleri ve etiketleri ayır
+X = df[['Fitness_Level', 'Goal', 'Target_Area']]  # Özellikler
+y = df['Exercise']  # Etiketler (Egzersizler)
 
-# Modeli Eğit
-model = RandomForestClassifier(random_state=42)
-model.fit(X, y)
+# Eğitim ve test verisine ayır
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# Modeli Kaydet
-pickle.dump(model, open("model.pkl", "wb"))
+# Modeli oluştur ve eğit
+model = RandomForestClassifier(n_estimators=100)
+model.fit(X_train, y_train)
+
+# Modeli kaydet
+with open('model.pkl', 'wb') as f:
+    pickle.dump(model, f)
