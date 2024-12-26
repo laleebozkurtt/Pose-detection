@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Recommendations</title>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</head>
+<body>
+    <h1>Recommended Exercises</h1>
+
+    <div id="exercise_list">
+        {% for exercise in exercises %}
+        <div class="exercise">
+            <img src="{{ url_for('static', filename='images/' + exercise + '.png') }}" alt="{{ exercise }}">
+            <p>{{ exercise }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Real-Time Exercise Validation</h2>
+    <video id="video" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+    <script>
+        // MediaPipe ile gerçek zamanlı hareket doğrulama için JavaScript kodu burada olacak
+    </script>
+</body>
+</html>

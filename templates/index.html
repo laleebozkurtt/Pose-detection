@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Fitness Recommendation</h1>
+    <form action="/recommend" method="POST">
+        <label for="fitness_level">Fitness Level:</label>
+        <select id="fitness_level" name="fitness_level">
+            <option value="0">Beginner</option>
+            <option value="1">Intermediate</option>
+            <option value="2">Advanced</option>
+        </select><br>
+
+        <label for="goal">Goal:</label>
+        <select id="goal" name="goal">
+            <option value="0">Strength Building</option>
+            <option value="1">Muscle Gain</option>
+            <option value="2">Flexibility Enhancement</option>
+            <option value="3">Endurance Improvement</option>
+        </select><br>
+
+        <label for="target_area">Target Area:</label>
+        <select id="target_area" name="target_area">
+            <option value="0">Legs</option>
+            <option value="1">Abs</option>
+            <option value="2">Arms</option>
+            <option value="3">Back</option>
+        </select><br>
+
+        <input type="submit" value="Get Exercise Recommendations">
+    </form>
+</body>
+</html>
